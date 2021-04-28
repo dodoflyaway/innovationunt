@@ -78,3 +78,17 @@ class sitetrans(models.Model):
 		return self.donateusername
 
 
+
+class invtoken(models.Model):
+	inuser = models.ForeignKey(invuser,on_delete=models.CASCADE)
+	husername = models.CharField(max_length=200)
+	donateusername = models.CharField(max_length=200)
+	amount = models.IntegerField()
+	key = models.IntegerField()
+
+	def __str__(self):
+		return self.husername
+
+
+
+

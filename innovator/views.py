@@ -238,6 +238,7 @@ def buytoken(response,tok,username):
 				update_obj = sitetrans.objects.get(donateusername=username)
 				update_obj.amount = update_obj.amount + int_amount
 				update_obj.save()
+				return  redirect("/home/"+str(tok)+str('/')+str(username))
 			else:        
 				tran.holder = user_obj
 				tran.donateusername = username
@@ -245,6 +246,8 @@ def buytoken(response,tok,username):
 				tran.amount = int_amount
 				tran.key = int_key
 				tran.save()
+				return  redirect("/home/"+str(tok)+str('/')+str(username))
+
 
 
 		else:
@@ -253,6 +256,12 @@ def buytoken(response,tok,username):
 		return render(response,'innovator/buytoken.html',{'user_obj':user_obj,'tok':tok})
 
 	return render(response,'innovator/buytoken.html',{'user_obj':user_obj,'tok':tok})
+
+
+def tokendonate(response,product_id,username,creator):
+	return HttpResponse("<h1> donate tokens </h1>")
+
+
 
 
 

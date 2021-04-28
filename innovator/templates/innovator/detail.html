@@ -23,6 +23,7 @@
 
 <a href="{% url  'showsubs' product.id pname.username %}"> <button> view the subcribers </button> </a>
 
+<br/>
 
 <a href="{% url 'commentshow' product.id pname.username %}"> <button>  view comments   </button> </a>
 
@@ -50,6 +51,13 @@
 
 
 <a href="{% url  'commentmake' product.id pname.username  %}"> <button> comment </button> </a>
+
+<br/>
+<br/>
+<br/>
+
+
+<a href="{% url  'tokendonate' product.id pname.username product.postedby.username  %}"> <button> donate token </button> </a>
 
 
 {% endif  %}
