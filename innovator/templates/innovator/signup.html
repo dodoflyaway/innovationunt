@@ -1,0 +1,69 @@
+
+<h2> Innovator sign up page </h2>
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+
+
+
+<form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
+
+
+
+{% csrf_token %}
+
+username
+<br />
+<input type="text" name="username"/>
+<br />
+
+firstname
+<br />
+<input type="textbox" name="firstname"/>
+<br />
+
+lastname
+<br />
+<input type="text" name="lastname"/>
+<br />
+
+email
+<br />
+<input type="text" name="email"/>
+<br />
+
+phone
+<br />
+<input type="text" name="phone"/>
+<br />
+
+address
+<br />
+<input type="text" name="address"/>
+<br />
+
+password1
+<br />
+<input type="password" name="password1"/>
+<br />
+
+password2
+<br />
+<input type="password" name="password2"/>
+<br />
+<br />
+
+
+
+
+<input  class="btn btn-primary" type="submit" value="signup" />
+
+
+</form>
+
+
+<a href="/signupn"> are you a normal user</a>

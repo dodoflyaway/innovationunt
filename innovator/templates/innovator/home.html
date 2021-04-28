@@ -1,0 +1,35 @@
+<h1>Home page </h1>
+
+<p> you are logged in as {{user.username}} </p>
+
+
+<p> accounts is of {{user.user_type}} type  </p>
+
+
+{% if user.user_type == "innovator" %}
+
+<a href="/create"> create a new product</a>
+
+{% endif %}
+
+
+{% for product in product.all%}
+<div id=details>
+
+ <a href="{% url 'detail' product.id user.username %}"><h1>{{product.title}}</h1></a>
+ <p>{{product.summary}}</p>
+
+</div>
+
+{% endfor %}
+
+
+
+
+
+{% if user.user_type == "ordinaryuser" %}
+
+<a href="{% url 'buytoken' tok user.username %}"> <button> buy tokens </button> </a>
+
+{% endif %}
+

@@ -1,0 +1,8 @@
+<h1>subcribers for {{userobj.username}} </h1>
+{% for su in userobj.sub_set.all %}
+
+<h4> {{su.ordinary_username}} <h4>
+
+
+
+{% endfor %}

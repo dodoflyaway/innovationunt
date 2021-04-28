@@ -1,0 +1,10 @@
+<h1> showing comments 24/7 </h1>
+
+{{prod}}
+
+{% for item in prod.comment_set.all %}
+
+<h5> {{item.commentz}} </h5> <br>
+<h6> commented by {{item.ordusername}} </h6> <br>
+
+{% endfor%}

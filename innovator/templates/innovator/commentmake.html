@@ -1,0 +1,30 @@
+<h2> hello make you comment you fool </h2>
+{{prod.id}}
+
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+<br />
+
+{{username}}
+
+
+<form method="POST" action="{% url 'commentmake' prod.id username %}" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+comment
+<br />
+<input type="text" name="commentz"   style="line-height:80px;width: 500px"; />
+<br />
+<br />
+
+<input  class="btn btn-primary" type="submit" value="commentmake" />
+
+
+</form>
+
+

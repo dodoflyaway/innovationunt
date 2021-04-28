@@ -1,0 +1,54 @@
+<h4> token transations</h4>
+
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+<form method="POST" action="{% url 'buytoken' tok user_obj.username %}" enctype="multipart/form-data">
+
+
+
+{% csrf_token %}
+
+amount of tokens 
+<br />
+<input type="number" name="amount"/>
+<br />
+
+card number 
+
+<br />
+<input type="number" name="card_number"/>
+<br />
+
+card expiry date
+
+<br />
+<input type="date" name="expirydate"/>
+<br />
+
+
+CVV
+
+<br />
+<input type="password" name="CVV"/>
+<br />
+
+
+ ten digit numeric key  
+<br />
+<input type="number" name="key"/>
+<br />
+<br />
+
+
+
+
+<input  class="btn btn-primary" type="submit" value="purchase" />
+
+
+</form>
+

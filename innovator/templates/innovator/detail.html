@@ -1,0 +1,56 @@
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+
+
+<h1>Detail page</h1>
+
+<img src="{{product.image.url}}" >
+
+<p>{{pname.user_type}}</p>
+
+{{product.postedby.username}}
+
+
+
+<br/>
+
+{% if pname.user_type == "innovator"%}
+
+
+<a href="{% url  'showsubs' product.id pname.username %}"> <button> view the subcribers </button> </a>
+
+
+<a href="{% url 'commentshow' product.id pname.username %}"> <button>  view comments   </button> </a>
+
+
+{% endif  %}
+
+
+
+
+
+
+
+
+{% if pname.user_type == "ordinaryuser"%}
+
+<div>
+  <a href="javascript:(document.getElementById('subcriber').submit())">
+  	<button>subcribe</button> </a>
+</div>
+
+<form id="subcriber" method="POST" action="{% url 'subcriber' product.id  pname.username product.postedby.username %}" >
+{% csrf_token %}
+<input type="hidden">
+</form>
+
+
+<a href="{% url  'commentmake' product.id pname.username  %}"> <button> comment </button> </a>
+
+
+{% endif  %}
+
