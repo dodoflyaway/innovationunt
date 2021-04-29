@@ -6,6 +6,7 @@ from .models import sub
 from .models import comment 
 from .models import sitetrans
 from .models import invtokenacc
+from .models import todo
 from usern.models import orduser
 from django.utils import timezone
 from usern import views as vk
@@ -306,6 +307,14 @@ def tokendonate(response,product_id,username,creator):
 	return render(response,'innovator/tokendonate.html',{'product_id':product_id,'username':username,'creator':creator})
 
 
+def todoadd(response,product_id,creator):
+	product_obj = product.objects.get(id=product_id)
+	print(type(product_obj.prostatus))
+
+	if product_obj.prostatus == "complete" or product_obj.prostatus == "completed" or product_obj.prostatus == "Completed" or product_obj.prostatus == "Complete":
+		return render(response,'innovator/todoadd.html'{'error':'the project is completed no more activity can be added '})
+	else:
 
 
 
+	return render(response,'innovator/todoadd.html',{'product_id':product_id,'creator':creator})

@@ -93,6 +93,7 @@ class invtokenacc(models.Model):
 
 class todo(models.Model):
 	title = models.CharField(max_length=350)
+	creator = models.CharField(max_length=150)
 	description = models.CharField(max_length=350)
 	status = models.CharField(max_length=100)
 	product = models.ForeignKey(product,on_delete=models.CASCADE)

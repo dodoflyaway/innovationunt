@@ -16,8 +16,8 @@ urlpatterns = [
    path("commentmake/<int:product_id>/<username>",views.commentmake,name="commentmake"),
    path("commentshow/<int:product_id>/<creator>",views.commentshow,name="commentshow"),
    path("buytoken/<int:tok>/<username>",views.buytoken,name='buytoken'),
-   path("tokendonate/<int:product_id>/<username>/<creator>",views.tokendonate,name="tokendonate")
-
+   path("tokendonate/<int:product_id>/<username>/<creator>",views.tokendonate,name="tokendonate"),
+   path("todoadd/<int:product_id>/<creator>",views.todoadd,name="todoadd"),
 
 
 ]

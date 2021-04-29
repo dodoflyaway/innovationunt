@@ -1,0 +1,29 @@
+<h4> add todo </h4>
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+<br />
+
+<form method="POST" action="{% url 'todoadd' product_id username creator %}" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+
+title 
+
+<br/>
+<input type="text" name="title">
+<br/>
+
+
+
+
+
+
+
+
+
+<input  class="btn btn-primary" type="submit" value="todoadd" />
