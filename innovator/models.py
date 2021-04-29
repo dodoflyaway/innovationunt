@@ -79,15 +79,28 @@ class sitetrans(models.Model):
 
 
 
-class invtoken(models.Model):
+class invtokenacc(models.Model):
 	inuser = models.ForeignKey(invuser,on_delete=models.CASCADE)
 	husername = models.CharField(max_length=200)
-	donateusername = models.CharField(max_length=200)
+	donateusername = models.ForeignKey(sitetrans,on_delete=models.CASCADE)
 	amount = models.IntegerField()
-	key = models.IntegerField()
+	mixd = models.CharField(max_length=350)
+	keyh = models.ForeignKey(product,on_delete=models.CASCADE)
 
 	def __str__(self):
-		return self.husername
+		return self.mixd
+
+
+class todo(models.Model):
+	title = models.CharField(max_length=350)
+	description = models.CharField(max_length=350)
+	status = models.CharField(max_length=100)
+	product = models.ForeignKey(product,on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.title
+
+
 
 
 

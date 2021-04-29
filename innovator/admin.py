@@ -4,6 +4,7 @@ from .models import product
 from .models import sub
 from .models import comment
 from .models import sitetrans
+from .models import invtokenacc
 from usern.models import orduser
 
 
@@ -14,5 +15,6 @@ admin.site.register(product)
 admin.site.register(sub)
 admin.site.register(comment)
 admin.site.register(sitetrans)
+admin.site.register(invtokenacc)
 
 

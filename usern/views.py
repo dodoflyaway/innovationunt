@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import orduser
+#from innovator.models import sitetrans
 
 # Create your views here.
 

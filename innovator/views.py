@@ -5,6 +5,7 @@ from .models import product
 from .models import sub
 from .models import comment 
 from .models import sitetrans
+from .models import invtokenacc
 from usern.models import orduser
 from django.utils import timezone
 from usern import views as vk
@@ -259,8 +260,50 @@ def buytoken(response,tok,username):
 
 
 def tokendonate(response,product_id,username,creator):
-	return HttpResponse("<h1> donate tokens </h1>")
+	acc = invtokenacc()
+	mixk = str(username) + str(creator)
+	donation_list = invtokenacc.objects.values_list('mixd',flat=True) #geting the list of existing user/inv pairs
+	creator_obj = invuser.objects.get(username=creator) # inv user instance for foreign key
+	product_obj = product.objects.get(id=product_id)
+	tran_obj = sitetrans.objects.get(donateusername=username)
+   
 
+	if response.method == 'POST':
+		if response.POST['amount'] and response.POST['key']:
+			
+			int_keyr_len = len(response.POST['key'])
+			int_amount = int(response.POST['amount'])
+
+			if int_keyr_len != 10:
+				return render(response,'innovator/tokendonate.html',{'product_id':product_id,'username':username,'creator':creator,'error':'key should be 10 digits'})
+
+			if mixk in donation_list:
+				update_amount = invtokenacc.objects.get(mixd=mixk)
+				tran_obj.amount = tran_obj.amount - int_amount
+				update_amount.amount = update_amount.amount + int_amount    #checking if the person has donated already
+				update_amount.save()
+				tran_obj.save()
+				return redirect("/detail/"+str(product_id)+str("/")+str(username))
+			else:
+				acc.inuser = creator_obj
+				acc.husername = creator
+				acc.donateusername = tran_obj
+				tran_obj.amount = tran_obj.amount - int_amount
+				acc.amount = int_amount
+				acc.mixd = mixk
+				acc.keyh = product_obj
+				acc.save()
+				tran_obj.save()
+				return redirect("/detail/"+str(product_id)+str("/")+str(username))
+
+
+		else:
+			return render(response,'innovator/tokendonate.html',{'product_id':product_id,'username':username,'creator':creator,'error':'All field are required'})
+
+	else:
+		return render(response,'innovator/tokendonate.html',{'product_id':product_id,'username':username,'creator':creator})
+
+	return render(response,'innovator/tokendonate.html',{'product_id':product_id,'username':username,'creator':creator})
 
 
 

@@ -1,0 +1,40 @@
+<h4> token donations </h4>
+
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+
+
+
+
+
+<form method="POST" action="{% url 'tokendonate' product_id username creator  %}" enctype="multipart/form-data">
+
+
+
+{% csrf_token %}
+
+amount of tokens 
+<br />
+<input type="number" name="amount"/>
+<br />
+
+
+ ten digit numeric key  
+<br />
+<input type="number" name="key"/>
+<br />
+<br />
+
+
+
+
+<input  class="btn btn-primary" type="submit" value="donate" />
+
+
+</form>
+
