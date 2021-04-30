@@ -1,0 +1,39 @@
+<h3>Manage project</h3>
+
+
+
+<h4> projects posted by {{creator}} </h4>
+
+{% for item in creator.product_set.all %}
+   <br/>
+     
+  
+    
+       <form method="POST" action="{% url 'manageproject' product.id creator.username %}"> 
+       	{% csrf_token %}
+       	{{item.title}}  
+       <input name="statuschange{{item.id}}" class="btn btn-primary" type="submit" value="statuschange"  style=margin-left:10px;/>
+       </form>
+
+       {% if rstat == True and rid == item.id  %}
+
+         <form method="POST" action="{% url ''manageproject' product.id creator.username'%}" enctype="multipart/form-data">
+
+         	{% csrf_token%}
+
+
+         	 
+
+
+
+         </form>
+
+       {%endif%}
+
+    <br/>
+
+    
+    
+    
+
+{% endfor %}

@@ -7,7 +7,11 @@
 {% endif %}
 <br />
 
-<form method="POST" action="{% url 'todoadd' product_id username creator %}" enctype="multipart/form-data">
+
+<h5> adding todo items for {{product.title}} </h5>
+
+
+<form method="POST" action="{% url 'todoadd' product.id  creator %}" enctype="multipart/form-data">
 
 {% csrf_token %}
 
@@ -15,14 +19,26 @@
 title 
 
 <br/>
-<input type="text" name="title">
+<input type="text" name="title" >
+<br/>
+
+description 
+
+<br/>
+<input type="text" name="description" style="line-height:80px;width: 500px";>
+<br/>
 <br/>
 
 
+project status
 
-
-
-
+<br/>
+<select name="status" id="todo_status">
+	<option value="inprogress">inprogress</option>
+	<option value="completed">completed</option>
+</select>
+<br/>
+<br/>
 
 
 

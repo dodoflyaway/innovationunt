@@ -307,14 +307,45 @@ def tokendonate(response,product_id,username,creator):
 	return render(response,'innovator/tokendonate.html',{'product_id':product_id,'username':username,'creator':creator})
 
 
+
 def todoadd(response,product_id,creator):
 	product_obj = product.objects.get(id=product_id)
+	todo_obj = todo()
 	print(type(product_obj.prostatus))
 
+
 	if product_obj.prostatus == "complete" or product_obj.prostatus == "completed" or product_obj.prostatus == "Completed" or product_obj.prostatus == "Complete":
-		return render(response,'innovator/todoadd.html'{'error':'the project is completed no more activity can be added '})
+		return render(response,'innovator/todoadd.html',{'error':'the project is completed no more activity can be added '})
+
+	if response.method == 'POST':
+		if response.POST['title'] and response.POST['description'] and response.POST['status']:
+			todo_obj.title = response.POST['title']
+			todo_obj.creator = creator
+			todo_obj.description = response.POST['description']
+			todo_obj.status = response.POST['status']
+			todo_obj.product = product_obj
+			todo_obj.save()  
+
+		else:
+			return render(response,'innovator/todoadd.html',{'product':product_obj,'creator':creator})
+
 	else:
+		return render(response,'innovator/todoadd.html',{'product':product_obj,'creator':creator})
+			
+	return render(response,'innovator/todoadd.html',{'product':product_obj,'creator':creator})
 
 
+def manageproject(response,product_id,creator):
+	rstat = False
+	prod_obj = product.objects.get(id=product_id)
+	creator_obj = invuser.objects.get(username=creator)
+	print(response.POST)
+	if response.method == 'POST':
+		for item in creator_obj.product_set.all():
+			print("inl")
+			if response.POST.get('statuschange'+str(item.id)):
+				rstat = True
+				return render(response,'innovator/manageproject.html',{'creator':creator_obj,'product':prod_obj,'rstat':rstat,'rid':item.id})
 
-	return render(response,'innovator/todoadd.html',{'product_id':product_id,'creator':creator})
+	return render(response,'innovator/manageproject.html',{'creator':creator_obj,'product':prod_obj,'rstat':rstat,'rid':0})
+ 

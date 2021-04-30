@@ -18,6 +18,7 @@ urlpatterns = [
    path("buytoken/<int:tok>/<username>",views.buytoken,name='buytoken'),
    path("tokendonate/<int:product_id>/<username>/<creator>",views.tokendonate,name="tokendonate"),
    path("todoadd/<int:product_id>/<creator>",views.todoadd,name="todoadd"),
+   path("manageproject/<int:product_id>/<creator>",views.manageproject,name="manageproject"),
 
 
 ]
