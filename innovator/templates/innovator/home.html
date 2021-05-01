@@ -16,7 +16,7 @@
 {% for product in product.all%}
 <div id=details>
 
- <a href="{% url 'detail' product.id user.username %}"><h1>{{product.title}}</h1></a>
+ <a href="{% url 'detail' product.id user.username  %}"><h1>{{product.title}}</h1></a>
  <p>{{product.summary}}</p>
 
 </div>

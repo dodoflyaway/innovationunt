@@ -9,13 +9,11 @@
 
 
 <h5> adding todo items for {{product.title}} </h5>
-
+{{product.postedby}}
 
 <form method="POST" action="{% url 'todoadd' product.id  creator %}" enctype="multipart/form-data">
 
 {% csrf_token %}
-
-
 title 
 
 <br/>
@@ -29,8 +27,7 @@ description
 <br/>
 <br/>
 
-
-project status
+todo status
 
 <br/>
 <select name="status" id="todo_status">

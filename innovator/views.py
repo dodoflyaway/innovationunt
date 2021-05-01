@@ -134,7 +134,7 @@ def detail(response,product_id,username):
 	print(pname)
 
 	prod = get_object_or_404(product,pk=product_id)
-	return render(response,'innovator/detail.html',{'product':prod,'pname':pname})
+	return render(response,'innovator/detail.html',{'product':prod,'pname':pname,'tokk':tokk})
 
 
 def subcriber(response,product_id,username,creator):
@@ -311,11 +311,16 @@ def tokendonate(response,product_id,username,creator):
 def todoadd(response,product_id,creator):
 	product_obj = product.objects.get(id=product_id)
 	todo_obj = todo()
-	print(type(product_obj.prostatus))
+	
+	print(creator)
+	print(product_obj.postedby)
+	if str(product_obj.postedby) != str(creator):
+		return render(response,'innovator/inverror.html',{'product':product_obj,'creator':creator,'error':'you are not the creator of the project you are not allowed to add Todo items'})
+
 
 
 	if product_obj.prostatus == "complete" or product_obj.prostatus == "completed" or product_obj.prostatus == "Completed" or product_obj.prostatus == "Complete":
-		return render(response,'innovator/todoadd.html',{'error':'the project is completed no more activity can be added '})
+		return render(response,'innovator/inverror.html',{'product':product_obj,'creator':creator,'error':'error the project is completed no more activity can be added '})
 
 	if response.method == 'POST':
 		if response.POST['title'] and response.POST['description'] and response.POST['status']:
@@ -335,17 +340,52 @@ def todoadd(response,product_id,creator):
 	return render(response,'innovator/todoadd.html',{'product':product_obj,'creator':creator})
 
 
+'''
+	chk_list = []
+	chk_pro = "inprogress"
+
+	for item in prod_obj.todo_set.all():
+		chk_list.append(item.status)  
+
+	if chk_pro in chk_list:
+		return render(response,'innovator/inverror.html',{'product':prod_obj,'creator':creator_obj,'error':'Items in todo list are unfinished  '})
+'''
+
+
 def manageproject(response,product_id,creator):
 	rstat = False
 	prod_obj = product.objects.get(id=product_id)
 	creator_obj = invuser.objects.get(username=creator)
-	print(response.POST)
+	cmp_str_prod = str(prod_obj.postedby)
+	cmp_str_creator = str(creator_obj.username)
+	if  cmp_str_creator != cmp_str_prod:
+		return render(response,'innovator/inverror.html',{'product':prod_obj,'creator':creator_obj,'error':'error you are not the owner of the project changes can not be made by  '})
+
+
 	if response.method == 'POST':
 		for item in creator_obj.product_set.all():
-			print("inl")
 			if response.POST.get('statuschange'+str(item.id)):
 				rstat = True
-				return render(response,'innovator/manageproject.html',{'creator':creator_obj,'product':prod_obj,'rstat':rstat,'rid':item.id})
+				x = item.id
+				update_product = product.objects.get(id=x)
+				return render(response,'innovator/manageproject.html',{'creator':creator_obj,'product':update_product,'rstat':rstat,'rid':item.id})
+		
+		chk_list = []
+		chk_pro = "inprogress"
+
+		for item in prod_obj.todo_set.all():
+			chk_list.append(item.status)  
+
+		if chk_pro in chk_list:
+			return render(response,'innovator/inverror.html',{'product':prod_obj,'creator':creator_obj,'error':'Items in todo list are unfinished  '})
+
+
+		if response.POST.get('updatestatus'):
+			update_product = product.objects.get(id=product_id)
+			update_val = response.POST['updatestatus']
+			update_product.prostatus = update_val
+			update_product.save()
+
 
 	return render(response,'innovator/manageproject.html',{'creator':creator_obj,'product':prod_obj,'rstat':rstat,'rid':0})
  

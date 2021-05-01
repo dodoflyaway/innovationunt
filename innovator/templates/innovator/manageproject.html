@@ -17,23 +17,37 @@
 
        {% if rstat == True and rid == item.id  %}
 
-         <form method="POST" action="{% url ''manageproject' product.id creator.username'%}" enctype="multipart/form-data">
+
+        
+
+
+
+         <form method="POST" action="{% url 'manageproject' product.id creator.username %}" enctype="multipart/form-data">
 
          	{% csrf_token%}
+            select the status of the project
+
+         	<br>
+         	<select name="updatestatus" id="todo_status">
+				<option value="inprogress">inprogress</option>
+				<option value="completed">completed</option>
+             </select>
+         	<br>
+
+         	<input  class="btn btn-primary" type="submit" value="update" />
 
 
-         	 
+         
 
 
 
-         </form>
 
-       {%endif%}
+
+          </form>
+
+       {% endif %}
 
     <br/>
 
     
-    
-    
-
 {% endfor %}

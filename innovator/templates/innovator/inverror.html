@@ -1,0 +1,12 @@
+<h1> error page </h1>
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+
+
+
+<a href="{% url 'detail' product.id creator %}"> click here to return back to detail page </a>
