@@ -262,7 +262,7 @@ def buytoken(response,tok,username):
 
 def tokendonate(response,product_id,username,creator):
 	acc = invtokenacc()
-	mixk = str(username) + str(creator)
+	mixk = str(username) + str(creator) + str(product_id)
 	donation_list = invtokenacc.objects.values_list('mixd',flat=True) #geting the list of existing user/inv pairs
 	creator_obj = invuser.objects.get(username=creator) # inv user instance for foreign key
 	product_obj = product.objects.get(id=product_id)
@@ -421,3 +421,37 @@ def managetodo(response,product_id,creator):
 
 
 	return render(response,'innovator/managetodo.html',{'product':prod_obj,'creator':creator_obj})
+
+
+
+def manageaccount(response,product_id,creator):
+	prod_obj = product.objects.get(id=product_id)
+	creator_obj = invuser.objects.get(username=creator)
+	item_total = []
+	obj_list = []
+	cost_obj = dict()
+	for create_item in creator_obj.product_set.all():
+		
+		inside_total = 0
+		
+		for prod_item in create_item.invtokenacc_set.all():
+			inside_total = inside_total + prod_item.amount
+		
+		item_total.append(inside_total)
+		obj_list.append(create_item)
+
+	#print(item_total)
+
+	for i in range(len(item_total)):
+		cost_obj[obj_list[i]] = item_total[i]
+
+	#print(cost_obj)
+
+	for i in cost_obj:
+		print(str(i)+" "+str(cost_obj[i]))
+
+	return render(response,'innovator/manageaccount.html',{'product':prod_obj,'creator':creator_obj,'mix_dict':cost_obj})
+
+
+def encash(response,product_id,creator):
+	return render(response,'innovator/encash.html')

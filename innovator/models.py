@@ -91,6 +91,7 @@ class invtokenacc(models.Model):
 		return self.mixd
 
 
+
 class todo(models.Model):
 	title = models.CharField(max_length=350)
 	creator = models.CharField(max_length=150)

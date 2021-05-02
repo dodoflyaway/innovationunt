@@ -39,6 +39,10 @@
 <br/>
 <a href="{% url 'managetodo' product.id pname.username  %}"> <button> manage TODO   </button> </a>
 
+<br/>
+<br/>
+<a href="{% url 'manageaccount' product.id pname.username  %}"> <button>  Acoount  </button> </a>
+
 {% endif  %}
 
 
@@ -69,6 +73,7 @@
 
 
 <a href="{% url  'tokendonate' product.id pname.username product.postedby.username  %}"> <button> donate token </button> </a>
+
 
 
 

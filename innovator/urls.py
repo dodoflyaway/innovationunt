@@ -20,6 +20,9 @@ urlpatterns = [
    path("todoadd/<int:product_id>/<creator>",views.todoadd,name="todoadd"),
    path("manageproject/<int:product_id>/<creator>",views.manageproject,name="manageproject"),
    path("managetodo/<int:product_id>/<creator>",views.managetodo,name="managetodo"),
+   path("manageaccount/<int:product_id>/<creator>",views.manageaccount,name="manageaccount"),
+   path("encash/<int:product_id>/<creator>",views.encash,name="encash"),
+   
 
 
 ]

@@ -1,0 +1,16 @@
+<h1>manage account </h1>
+
+<h4> Projects under {{creator.username}}</h4>
+
+{% for key,value in mix_dict.items %}
+   
+   
+    <form method="POST" action="{% url 'encash' product.id creator.username %}"> 
+       	{% csrf_token %}
+       	<h5>{{key}}
+        : total token {{value}}  
+       <input name="encashtoken{{key.id}}" class="btn btn-primary" type="submit" value=" Encash "  style=margin-left:10px;/> </h5> 
+    </form>
+   
+
+{% endfor %}
