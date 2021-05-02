@@ -1,6 +1,6 @@
 <h3>Manage todolist </h3>
 
-
+{{product.todo}}
 
 <h4> todo list for the project  {{product.title}} </h4>
 
@@ -27,7 +27,7 @@
             select the status of TODO item
 
          	<br>
-         	<select name="todoupdatestatus" id="todo_status">
+         	<select name="todoupdatestatus{{item.id}}" id="todo_status">
 				<option value="inprogress">inprogress</option>
 				<option value="completed">completed</option>
              </select>

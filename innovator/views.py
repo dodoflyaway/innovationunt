@@ -385,6 +385,7 @@ def manageproject(response,product_id,creator):
 			update_val = response.POST['updatestatus']
 			update_product.prostatus = update_val
 			update_product.save()
+			return render(response,'innovator/invsuccess.html',{'creator':creator_obj,'product':prod_obj,'success':'updated the status'})
 
 
 	return render(response,'innovator/manageproject.html',{'creator':creator_obj,'product':prod_obj,'rstat':rstat,'rid':0})
@@ -395,6 +396,7 @@ def managetodo(response,product_id,creator):
 	creator_obj = invuser.objects.get(username=creator)
 	cmp_prod_name = str(prod_obj.postedby)
 	cmp_creator_name = str(creator_obj.username)
+	tdrstat = False
 
 	if cmp_creator_name != cmp_prod_name:
 		return render(response,'innovator/inverror.html',{'product':prod_obj,'creator':creator_obj,'error':'error you are not the owner of the project changes can not be made '})
@@ -405,16 +407,17 @@ def managetodo(response,product_id,creator):
 			if response.POST.get('todostatuschange'+str(item.id)):
 				tdrstat = True
 				tr = item.id
+				#print(tr)
 				update_todo = todo.objects.get(id=tr)
 				return render(response,'innovator/managetodo.html',{'creator':creator_obj,'product':prod_obj,'todo_obj':update_todo,'rid':item.id,'tdrstat':tdrstat})
 
-
-
-
-
-
-
-
+			if response.POST.get('todoupdatestatus'+str(item.id)):
+				#print(item.id)
+				xid = item.id
+				update_todo = todo.objects.get(id=xid)
+				update_todo.status = response.POST['todoupdatestatus'+str(xid)]
+				update_todo.save()
+				return render(response,'innovator/invsuccess.html',{'creator':creator_obj,'product':prod_obj,'success':'updated the status'})
 
 
 	return render(response,'innovator/managetodo.html',{'product':prod_obj,'creator':creator_obj})
