@@ -374,7 +374,7 @@ def manageproject(response,product_id,creator):
 		chk_pro = "inprogress"
 
 		for item in prod_obj.todo_set.all():
-			chk_list.append(item.status)  
+			chk_list.append(item.status)    # checking if items in todo list are pending 
 
 		if chk_pro in chk_list:
 			return render(response,'innovator/inverror.html',{'product':prod_obj,'creator':creator_obj,'error':'Items in todo list are unfinished  '})
@@ -389,3 +389,32 @@ def manageproject(response,product_id,creator):
 
 	return render(response,'innovator/manageproject.html',{'creator':creator_obj,'product':prod_obj,'rstat':rstat,'rid':0})
  
+
+def managetodo(response,product_id,creator):
+	prod_obj = product.objects.get(id=product_id)
+	creator_obj = invuser.objects.get(username=creator)
+	cmp_prod_name = str(prod_obj.postedby)
+	cmp_creator_name = str(creator_obj.username)
+
+	if cmp_creator_name != cmp_prod_name:
+		return render(response,'innovator/inverror.html',{'product':prod_obj,'creator':creator_obj,'error':'error you are not the owner of the project changes can not be made '})
+
+	if response.method == 'POST':
+		print(response.POST)
+		for item in prod_obj.todo_set.all():
+			if response.POST.get('todostatuschange'+str(item.id)):
+				tdrstat = True
+				tr = item.id
+				update_todo = todo.objects.get(id=tr)
+				return render(response,'innovator/managetodo.html',{'creator':creator_obj,'product':prod_obj,'todo_obj':update_todo,'rid':item.id,'tdrstat':tdrstat})
+
+
+
+
+
+
+
+
+
+
+	return render(response,'innovator/managetodo.html',{'product':prod_obj,'creator':creator_obj})

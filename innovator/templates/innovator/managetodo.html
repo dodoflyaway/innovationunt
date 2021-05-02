@@ -1,0 +1,52 @@
+<h3>Manage todolist </h3>
+
+
+
+<h4> todo list for the project  {{product.title}} </h4>
+
+{% for item in product.todo_set.all %}
+   <br/>
+     
+
+       <form method="POST" action="{% url 'managetodo' product.id creator.username %}"> 
+       	{% csrf_token %}
+       	{{item.title}}  
+       <input name="todostatuschange{{item.id}}" class="btn btn-primary" type="submit" value="todostatuschange"  style=margin-left:10px;/>
+       </form>
+
+       {% if tdrstat == True and rid == item.id  %}
+
+
+        
+
+
+
+         <form method="POST" action="{% url 'managetodo' product.id creator.username %}" enctype="multipart/form-data">
+
+         	{% csrf_token%}
+            select the status of TODO item
+
+         	<br>
+         	<select name="todoupdatestatus" id="todo_status">
+				<option value="inprogress">inprogress</option>
+				<option value="completed">completed</option>
+             </select>
+         	<br>
+
+         	<input  class="btn btn-primary" type="submit" value="update" />
+
+
+         
+
+
+
+
+
+          </form>
+
+       {% endif %}
+
+    <br/>
+
+    
+{% endfor %}
