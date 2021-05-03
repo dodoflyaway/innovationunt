@@ -24,6 +24,7 @@ urlpatterns = [
    path("encash/<int:product_id>/<creator>",views.encash,name="encash"),
    path("loginadmin/",views.loginadmin,name="loginadmin"),
    path("signupadmin/",views.signupadmin,name="signupadmin"),
+   path("adminpagekey/",views.adminpagekey,name="adminpagekey"),
    
 
 

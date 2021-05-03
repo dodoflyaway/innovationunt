@@ -458,10 +458,11 @@ def encash(response,product_id,creator):
 	return render(response,'innovator/encash.html')
 
 
-'''
+
 def adminpagekey(response):
+	key = 7792134936
+	
 	return render(response,'innovator/adminpagekey.html')
-'''
 
 
 def signupadmin(response):
