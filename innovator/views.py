@@ -7,6 +7,7 @@ from .models import comment
 from .models import sitetrans
 from .models import invtokenacc
 from .models import todo
+from .models import admin_my
 from usern.models import orduser
 from django.utils import timezone
 from usern import views as vk
@@ -455,3 +456,50 @@ def manageaccount(response,product_id,creator):
 
 def encash(response,product_id,creator):
 	return render(response,'innovator/encash.html')
+
+
+'''
+def adminpagekey(response):
+	return render(response,'innovator/adminpagekey.html')
+'''
+
+
+def signupadmin(response):
+	if response.method == 'POST':
+		if response.POST['username'] and response.POST['firstname'] and response.POST['email'] and response.POST['phone'] and response.POST['password1'] and response.POST['password2']:
+			print(response.POST)
+			admin_obj = admin_my()
+			chk = admin_my.objects.values_list('username',flat="True")
+			ur_recived = response.POST['username']
+
+			if ur_recived in chk:
+				return render(response,'innovator/signupadmin.html',{'error':'user already exist'})
+			else:
+				admin_obj.username =  response.POST['username']
+
+			admin_obj.firstname = response.POST['firstname']
+			admin_obj.email = response.POST['email']
+			admin_obj.phone = response.POST['phone']
+			
+			if response.POST['password1'] == response.POST['password2']:
+				admin_obj.password1 = response.POST['password1']
+				admin_obj.password2 = response.POST['password2'] 
+			else:
+				return render(response,'innovator/signupadmin.html',{'error':'both passwords should match'})
+			admin_obj.save()
+
+			return redirect("/loginadmin/")
+
+		else:
+			return render(response,'innovator/signupadmin.html',{'error':'all  fields are required '})
+	
+	else:
+		return render(response,'innovator/signupadmin.html')
+
+	return render(response,'innovator/signupadmin.html')
+
+
+def loginadmin(response):
+	return render(response,'innovator/loginadmin.html')
+
+

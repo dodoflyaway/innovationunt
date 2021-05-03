@@ -22,6 +22,8 @@ urlpatterns = [
    path("managetodo/<int:product_id>/<creator>",views.managetodo,name="managetodo"),
    path("manageaccount/<int:product_id>/<creator>",views.manageaccount,name="manageaccount"),
    path("encash/<int:product_id>/<creator>",views.encash,name="encash"),
+   path("loginadmin/",views.loginadmin,name="loginadmin"),
+   path("signupadmin/",views.signupadmin,name="signupadmin"),
    
 
 

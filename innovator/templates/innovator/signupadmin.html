@@ -1,5 +1,4 @@
-
-<h2> Innovator sign up page </h2>
+<h2> Admin sign up page </h2>
 
 {% if error %}
 {{ error }}
@@ -7,10 +6,15 @@
 <br />
 {% endif %}
 
+{% if success %}
+{{success}}
+<br />
+<br />
+{% endif %}
 
 
 
-<form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
+<form method="POST" action="{% url 'signupadmin' %}" enctype="multipart/form-data">
 
 
 
@@ -26,10 +30,7 @@ firstname
 <input type="textbox" name="firstname"/>
 <br />
 
-lastname
-<br />
-<input type="text" name="lastname"/>
-<br />
+
 
 email
 <br />
@@ -38,13 +39,9 @@ email
 
 phone
 <br />
-<input type="text" name="phone"/>
+<input type="number" name="phone"/>
 <br />
 
-address
-<br />
-<input type="text" name="address"/>
-<br />
 
 password1
 <br />
@@ -64,8 +61,3 @@ password2
 
 
 </form>
-
-
-<a href="/signupn"> are you a normal user</a>
-
-<a href="/signupadmin"> are you a admin </a>

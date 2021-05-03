@@ -6,6 +6,7 @@ from .models import comment
 from .models import sitetrans
 from .models import invtokenacc
 from .models import todo
+from .models import admin_my
 from usern.models import orduser
 
 
@@ -18,6 +19,8 @@ admin.site.register(comment)
 admin.site.register(sitetrans)
 admin.site.register(invtokenacc)
 admin.site.register(todo)
+admin.site.register(admin_my)
+
 
 
 

@@ -103,6 +103,23 @@ class todo(models.Model):
 		return self.title
 
 
+class admin_my(models.Model):
+	username = models.CharField(max_length=250)
+	firstname = models.CharField(max_length=100)
+	email = models.CharField(max_length=250)
+	phone = models.CharField(max_length=50)
+	password1 = models.CharField(max_length=150)
+	password2 = models.CharField(max_length=150)
+
+	def __str__(self):
+		return self.username
+
+
+
+
+
+
+
 
 
 
