@@ -500,6 +500,27 @@ def signupadmin(response):
 
 
 def loginadmin(response):
+	if response.method == 'POST':
+		if response.POST['username'] and response.POST['password1']:
+			check_user = admin_my.objects.values_list('username',flat="True")
+			if response.POST['username'] in check_user:
+				obj = response.POST['username']
+				user_obj = admin_my.objects.get(username=obj)
+				if str(user_obj.password1) == response.POST['password1']:
+					return HttpResponse("<h4>loging in success</h4>")
+				else:
+					return render(response,'innovator/loginadmin.html',{'error':' username or Password is wrong '})
+
+
+
+			else:
+				return render(response,'innovator/loginadmin.html',{'error':' Username or password is wrong '})
+
+
+
+		else:
+			return render(response,'innovator/loginadmin.html',{'error':' all field are required '})
+
 	return render(response,'innovator/loginadmin.html')
 
 

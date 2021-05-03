@@ -1,2 +1,44 @@
-<h1> login for the admin </h1>
+<h2> Innovator login up page </h2>
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+
+
+
+<form method="POST" action="{% url 'loginadmin' %}" enctype="multipart/form-data">
+
+
+
+{% csrf_token %}
+
+username
+<br />
+<input type="text" name="username"/>
+<br />
+
+password
+<br />
+<input type="password" name="password1"/>
+<br />
+<br />
+
+
+
+
+<input  class="btn btn-primary" type="submit" value="login" />
+
+
+</form>
+
+
+<a href="/loginn"> are you a normal user</a>
+
+<br/>
+
+
+
 
