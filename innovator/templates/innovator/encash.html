@@ -1,1 +1,15 @@
 <h1> encash page </h1>
+
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+
+<h5> request sent to admin for approval </h5>
+
+
+
+
+<a href="{% url 'detail' product.id creator.username %}"> return to detail page </a>

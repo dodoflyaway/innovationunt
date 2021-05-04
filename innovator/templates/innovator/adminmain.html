@@ -1,0 +1,31 @@
+<h3> admin home page </h3>
+
+<h4> logged in as 
+     {%for i in  admin_obj.all%}
+
+       {{i.username}}
+
+     {% endfor %}
+
+
+ </h4>
+
+{% for product in  product.all %}
+
+  <h3>{{product.title}}</h3>
+  
+  <h5>{{product.summary}}</h5> 
+
+   {{product.postedby.username}}
+    
+   <br/>
+
+
+{% endfor %}
+
+
+
+
+
+
+

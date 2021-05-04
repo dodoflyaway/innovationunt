@@ -8,6 +8,7 @@ from .models import sitetrans
 from .models import invtokenacc
 from .models import todo
 from .models import admin_my
+from .models import encash_request
 from usern.models import orduser
 from django.utils import timezone
 from usern import views as vk
@@ -446,22 +447,66 @@ def manageaccount(response,product_id,creator):
 	for i in range(len(item_total)):
 		cost_obj[obj_list[i]] = item_total[i]
 
-	#print(cost_obj)
+	for i in obj_list:
+		print("id "+ str(i.id))
 
 	for i in cost_obj:
 		print(str(i)+" "+str(cost_obj[i]))
 
+	if response.method == 'POST':
+		Trueshow = False
+		for i in cost_obj:
+
+			if response.POST.get("encashtoken"+str(i.id)):
+				return render(response,'innovator/manageaccount.html',{'product':prod_obj,'creator':creator_obj,'mix_dict':cost_obj,'Trueshow':True,'rid':i.id})
+			if response.POST.get("submitencashtoken"+str(i.id)):
+				account = response.POST['key']
+				product_reid = i 
+				if product_reid.prostatus == "completed":
+					return redirect("/encash/"+str(product_reid.id)+"/"+str(creator_obj)+"/"+str(account))
+				elif product_reid.prostatus == "inprogress":
+					return render(response,'innovator/manageaccount.html',{'product':prod_obj,'creator':creator_obj,'mix_dict':cost_obj,'error':'project not completed can not be submited for approval '})
+
 	return render(response,'innovator/manageaccount.html',{'product':prod_obj,'creator':creator_obj,'mix_dict':cost_obj})
 
 
-def encash(response,product_id,creator):
-	return render(response,'innovator/encash.html')
+def encash(response,product_id,creator,key):
+	
+	encash_obj = encash_request()
+	prod_obj = product.objects.get(id=product_id)
+	creator_obj = invuser.objects.get(username=creator)
+	chk = encash_request.objects.values_list('product',flat="True")
+	chk_list = []
+	for i in chk:
+		obj = product.objects.get(id=i)
+		chk_list.append(obj)
+	if prod_obj in chk_list:
+		return render(response,'innovator/encash.html',{'product':prod_obj,'creator':creator_obj,'error':'Error: already sent the for admin approval'})
 
+	account_no = key
+	encash_obj.user = creator_obj
+	encash_obj.product = prod_obj
+	encash_obj.status = "pending"
+	encash_obj.account_number = account_no
+	encash_obj.save()
+
+	return render(response,'innovator/encash.html',{'product':prod_obj,'creator':creator_obj})
+
+#def encash_status:
 
 
 def adminpagekey(response):
-	key = 7792134936
-	
+	key = "7792134936"
+	if response.method == 'POST':
+		if response.POST['key']:
+			if key == response.POST['key']:
+				return redirect("/loginadmin/")
+			else:
+				return render(response,'innovator/adminpagekey.html',{'error':' key is invalid '})
+		else:
+			return render(response,'innovator/adminpagekey.html',{'error':' field is required '})
+
+
 	return render(response,'innovator/adminpagekey.html')
 
 
@@ -508,20 +553,25 @@ def loginadmin(response):
 				obj = response.POST['username']
 				user_obj = admin_my.objects.get(username=obj)
 				if str(user_obj.password1) == response.POST['password1']:
-					return HttpResponse("<h4>loging in success</h4>")
+					return redirect("/adminmain/"+str(obj))
 				else:
 					return render(response,'innovator/loginadmin.html',{'error':' username or Password is wrong '})
-
-
-
 			else:
 				return render(response,'innovator/loginadmin.html',{'error':' Username or password is wrong '})
-
-
-
 		else:
 			return render(response,'innovator/loginadmin.html',{'error':' all field are required '})
 
 	return render(response,'innovator/loginadmin.html')
 
 
+def adminmain(response,adminname):
+	prod_obj = product.objects.all()
+	admin_obj = admin_my.objects.all()
+	return render(response,'innovator/adminmain.html',{'product':prod_obj,'admin_obj':admin_obj})
+
+
+
+#def adminuprove
+
+
+#def upvote  

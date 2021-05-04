@@ -7,6 +7,7 @@ from .models import sitetrans
 from .models import invtokenacc
 from .models import todo
 from .models import admin_my
+from .models import encash_request
 from usern.models import orduser
 
 
@@ -20,6 +21,7 @@ admin.site.register(sitetrans)
 admin.site.register(invtokenacc)
 admin.site.register(todo)
 admin.site.register(admin_my)
+admin.site.register(encash_request)
 
 
 

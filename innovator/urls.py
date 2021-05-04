@@ -21,10 +21,11 @@ urlpatterns = [
    path("manageproject/<int:product_id>/<creator>",views.manageproject,name="manageproject"),
    path("managetodo/<int:product_id>/<creator>",views.managetodo,name="managetodo"),
    path("manageaccount/<int:product_id>/<creator>",views.manageaccount,name="manageaccount"),
-   path("encash/<int:product_id>/<creator>",views.encash,name="encash"),
+   path("encash/<int:product_id>/<creator>/<key>",views.encash,name="encash"),
    path("loginadmin/",views.loginadmin,name="loginadmin"),
    path("signupadmin/",views.signupadmin,name="signupadmin"),
    path("adminpagekey/",views.adminpagekey,name="adminpagekey"),
+   path("adminmain/<adminname>",views.adminmain,name="adminmain"),
    
 
 

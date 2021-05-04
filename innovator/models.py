@@ -115,7 +115,14 @@ class admin_my(models.Model):
 		return self.username
 
 
+class encash_request(models.Model):
+	user = models.ForeignKey(invuser,on_delete=models.CASCADE)
+	product = models.ForeignKey(product,on_delete=models.CASCADE)
+	status = models.CharField(max_length=150)
+	account_number = models.IntegerField()
 
+	def __int__(self):
+		return self.account_number
 
 
 

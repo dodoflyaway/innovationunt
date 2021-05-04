@@ -2,14 +2,30 @@
 
 <h4> Projects under {{creator.username}}</h4>
 
+{% if error %}
+{{ error }}
+<br />
+<br />
+{% endif %}
+
+
+
 {% for key,value in mix_dict.items %}
    
+   {{creator.username}}
    
-    <form method="POST" action="{% url 'encash' product.id creator.username %}"> 
+    <form method="POST" action="{% url 'manageaccount' product.id creator.username   %}"> 
        	{% csrf_token %}
        	<h5>{{key}}
         : total token {{value}}  
        <input name="encashtoken{{key.id}}" class="btn btn-primary" type="submit" value=" Encash "  style=margin-left:10px;/> </h5> 
+       {% if Trueshow == True  and rid == key.id %}
+         Account number 
+       	<input type="number" name="key"/>
+       	 <input name="submitencashtoken{{key.id}}" class="btn btn-primary" type="submit" value=" encash"  style=margin-left:10px;/> </h5> 
+
+
+       {% endif %}
     </form>
    
 
