@@ -22,10 +22,13 @@ urlpatterns = [
    path("managetodo/<int:product_id>/<creator>",views.managetodo,name="managetodo"),
    path("manageaccount/<int:product_id>/<creator>",views.manageaccount,name="manageaccount"),
    path("encash/<int:product_id>/<creator>/<key>",views.encash,name="encash"),
+   path("encashstatus/<int:product_id>/<creator>",views.encashstatus,name="encashstatus"),
    path("loginadmin/",views.loginadmin,name="loginadmin"),
    path("signupadmin/",views.signupadmin,name="signupadmin"),
    path("adminpagekey/",views.adminpagekey,name="adminpagekey"),
    path("adminmain/<adminname>",views.adminmain,name="adminmain"),
+   path("adminuprove/<adminname>",views.adminuprove,name="adminuprove"),
+
    
 
 

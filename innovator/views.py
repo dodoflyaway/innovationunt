@@ -492,7 +492,12 @@ def encash(response,product_id,creator,key):
 
 	return render(response,'innovator/encash.html',{'product':prod_obj,'creator':creator_obj})
 
-#def encash_status:
+def encashstatus(response,product_id,creator):
+	prod_stat_obj = encash_request.objects.get(product=product_id)
+	print(prod_stat_obj)
+	return render(response,'innovator/encashstatus.html',{'product':prod_stat_obj})
+
+
 
 
 def adminpagekey(response):
@@ -567,11 +572,14 @@ def loginadmin(response):
 def adminmain(response,adminname):
 	prod_obj = product.objects.all()
 	admin_obj = admin_my.objects.all()
-	return render(response,'innovator/adminmain.html',{'product':prod_obj,'admin_obj':admin_obj})
+	ap_admin_obj = admin_my.objects.get(username=adminname)
+	return render(response,'innovator/adminmain.html',{'product':prod_obj,'admin_obj':admin_obj,'sp_admin':ap_admin_obj})
 
 
 
-#def adminuprove
+def adminuprove(response,adminname):
+	project = encash_request.objects.all()
+	return render(response,'innovator/adminuprove.html',{'project':project})
 
 
 #def upvote  
