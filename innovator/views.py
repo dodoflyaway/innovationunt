@@ -579,7 +579,24 @@ def adminmain(response,adminname):
 
 def adminuprove(response,adminname):
 	project = encash_request.objects.all()
-	return render(response,'innovator/adminuprove.html',{'project':project})
+	admin_user = admin_my.objects.get(username=adminname)
+	if response.method == 'POST':
+		for i in project:
+			if response.POST.get("adminuprove"+str(i.id)):
+				passid = i.product.id
+				name = i.user
+				srch = str(name)+str(passid)
+				obj_stat = encash_request.objects.get(id=i.id)
+				obj_stat.status = "Encashed"
+				obj_stat.save()
+				incacc_list = invtokenacc.objects.filter(mixd__contains=srch)
+				for i in incacc_list:
+					obj_deduct = invtokenacc.objects.get(mixd=i)
+					obj_deduct.amount = 0
+					obj_deduct.save()
+
+				return HttpResponse("<h2>Project  approved for encash ment amount sent </h2>")
+
+	return render(response,'innovator/adminuprove.html',{'project':project,'admin':admin_user})
 
 
-#def upvote  

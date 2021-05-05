@@ -1,8 +1,15 @@
 <h2>Admin aprove page</h2>
 {% for i in  project %}
      <h3> posted by {{i.user}}</h3>
-	<h3> project : {{ i.product.title }}</h3>
-	
+	<form method="POST" action="{% url 'adminuprove' admin.username %}">
+	{% csrf_token %}
+    <h4> project : {{ i.product.title }}
+    
+    <input name="adminuprove{{i.id}}" class="btn btn-primary" type="submit" value=" uprove "  style=margin-left:10px;/> </h4> 
+
+
+	</form>
+
 
 
 
