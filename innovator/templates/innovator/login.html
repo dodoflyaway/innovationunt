@@ -1,4 +1,20 @@
-<h2> Innovator login up page </h2>
+{% extends "innovator/base.html" %}
+
+
+
+
+
+
+{% block link %}
+<a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+{% endblock %}
+
+
+
+{% block content%}
+
+<div class="alert alert-danger" role="alert">
+  
 
 {% if error %}
 {{ error }}
@@ -6,12 +22,12 @@
 <br />
 {% endif %}
 
-
-
+</div>
 
 <form method="POST" action="{% url 'login' %}" enctype="multipart/form-data">
-
-
+<br />
+<h2 > Innovator login up page </h2>
+<br/>
 
 {% csrf_token %}
 
@@ -34,10 +50,13 @@ password
 
 </form>
 
-
+<br />
 <a href="/loginn"> are you a normal user</a>
 
 <br/>
 
 <a href="/adminpagekey"> are you a admin </a> 
+
+
+{% endblock %}
 
