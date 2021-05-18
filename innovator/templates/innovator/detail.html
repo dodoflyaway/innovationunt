@@ -1,3 +1,57 @@
+{% extends "innovator/base.html" %}
+
+
+
+
+
+{% block link %}
+    
+    <!-- Nav bar  -->
+
+    
+
+	{% if pname.user_type == "innovator"%}
+
+	    <button type="button" class="btn btn-primary">logged as <span class="badge"> {{pname.username}} </span></button>
+
+      	<a class="nav-link" href="{% url 'managetodo' product.id pname.username  %}"> Manage TODO</a>
+
+      	<a class="nav-link" href="{% url  'showsubs' product.id pname.username %}"> subcribers </a>
+
+      	<a class="nav-link" href="{% url 'manageaccount' product.id pname.username  %}"> Account </a>
+
+      	<a class="nav-link" href="{% url 'encashstatus' product.id pname.username  %}">Encash status </a>
+
+      	
+
+      	
+
+
+
+	{% endif  %}
+     
+     
+
+	{% if pname.user_type == "ordinaryuser"%}
+
+	<button type="button" class="btn btn-primary">logged as <span class="badge"> {{pname.username}} </span></button>
+
+    <a class="nav-link" href="{% url  'tokendonate' product.id pname.username product.postedby.username  %}" style="margin-left:8px"> donate </a>
+
+	{% endif  %}
+
+	<a class="nav-link" href="{%url  'home' tokk pname %}" style="margin-left:8px"> home </a> 
+    
+    
+
+{% endblock %}
+
+
+
+
+
+{%block content%}
+
 {% if error %}
 {{ error }}
 <br />
@@ -6,83 +60,90 @@
 
 
 
-<h1>Detail page</h1>
-
-<img src="{{product.image.url}}" >
-
-<p>{{pname.user_type}}</p>
-
-{{product.postedby.username}}
-
+<br>
+<div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px"> Product  {{product.title}}  </h1>
+      <br>
+</div>
+<br>
 
 
-<br/>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-5">
+			<img src="{{product.image.url}}" class="img-fluid " height="325"  width="415" />
+		</div>
+        
+	 <div class="col-lg-3">
 
-{% if pname.user_type == "innovator"%}
+      {% if pname.user_type == "innovator"%}
 
-<br/>
-<a href="{% url  'showsubs' product.id pname.username %}"> <button> view the subcribers </button> </a>
+	   <button type="button" class="btn btn-info"> <a class="nav-link text-white" href="{% url  'showsubs' product.id pname.username %}"> view the subcribers  </a> </button>
+      <br />
+	  <br />
+	  <button type="button" class="btn btn-info">
+	  <a  class="nav-link text-white" href="{% url 'commentshow' product.id pname.username %}">   view comments    </a> </button>
 
-<br/>
-<br/>
-<a href="{% url 'commentshow' product.id pname.username %}"> <button>  view comments   </button> </a>
+	  <br/>
+	  <br/>
+	  <button type="button" class="btn btn-info">
+	  <a class="nav-link text-white" href="{% url 'todoadd' product.id pname.username %}">  add todo items  </a>
+	  </button>
 
-<br/>
-<br/>
-<a href="{% url 'todoadd' product.id pname.username %}"> <button> add todo items </button> </a>
-
-<br/>
-<br/>
-<a href="{% url 'manageproject' product.id pname.username %}"> <button> manage  project </button> </a>
-
-<br/>
-<br/>
-<a href="{% url 'managetodo' product.id pname.username  %}"> <button> manage TODO   </button> </a>
-
-<br/>
-<br/>
-<a href="{% url 'manageaccount' product.id pname.username  %}"> <button>  Acoount  </button> </a>
-
-<br/>
-<br/>
-<a href="{% url 'encashstatus' product.id pname.username  %}"> <button>  Encash status  </button> </a>
-
-{% endif  %}
-
-
-
-
+	  <br/>
+	  <br/>
+	  <button type="button" class="btn btn-info">
+	  <a class="nav-link text-white" href="{% url 'manageproject' product.id pname.username %}">  manage  project  </a>
+	  </button>
+	  <br/>
+	  <br/>
+	  
+	  <br/>
+	  <br/>
+	  
+	  {% endif  %}
 
 
+	  {% if pname.user_type == "ordinaryuser"%}
+
+		<div>
+		  <a href="javascript:(document.getElementById('subcriber').submit())">
+		  	<button>subcribe</button> </a>
+		</div>
+
+		<form id="subcriber" method="POST" action="{% url 'subcriber' product.id  pname.username product.postedby.username %}" >
+		{% csrf_token %}
+		<input type="hidden">
+		</form>
 
 
-{% if pname.user_type == "ordinaryuser"%}
+		<a href="{% url  'commentmake' product.id pname.username  %}"> <button> comment </button> </a>
 
-<div>
-  <a href="javascript:(document.getElementById('subcriber').submit())">
-  	<button>subcribe</button> </a>
+
+	  {% endif  %}
+
+    </div>
+
+	</div>
+
 </div>
 
-<form id="subcriber" method="POST" action="{% url 'subcriber' product.id  pname.username product.postedby.username %}" >
-{% csrf_token %}
-<input type="hidden">
-</form>
 
 
-<a href="{% url  'commentmake' product.id pname.username  %}"> <button> comment </button> </a>
+
+
+
+{{product.body}}
+
+
+
+
+
 
 <br/>
-<br/>
-<br/>
-
-
-<a href="{% url  'tokendonate' product.id pname.username product.postedby.username  %}"> <button> donate token </button> </a>
 
 
 
 
-{% endif  %}
 
-<br/>
-<br/>
-<a href="{%url  'home' tokk pname %}"> go back to home </a>
+{% endblock %}

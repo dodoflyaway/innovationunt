@@ -1,23 +1,56 @@
-<h1>Home page </h1>
-
-<p> you are logged in as {{user.username}} </p>
+{% extends "innovator/base.html" %}
 
 
-<p> accounts is of {{user.user_type}} type  </p>
+{% block link %}
 
+<button type="button" class="btn btn-primary">logged as <span class="badge"> {{user.username}} </span></button>
 
 {% if user.user_type == "innovator" %}
-
-<a href="/create"> create a new product</a>
-
+<a class="nav-link" href="{% url 'create' %}" style=margin-left:10px;>New product</a>
 {% endif %}
 
 
-{% for product in product.all%}
-<div id=details>
+{% if user.user_type == "ordinaryuser" %}
+<a class="nav-link" href="{% url 'buytoken' tok user.username %}" style=margin-left:10px;>Buy Token</a>
+{% endif %}
 
- <a href="{% url 'detail' product.id user.username  %}"><h1>{{product.title}}</h1></a>
- <p>{{product.summary}}</p>
+
+{% endblock %}
+
+
+
+{% block content%}
+<br>
+<div class="well text-muted text-center" style="background: #b3ffb3">
+      <h1 style="padding: 10px 10px"> Projects  </h1>
+      <br>
+</div>
+<br>
+
+
+
+
+
+
+{% for product in product.all%}
+<div class="row pt-3">
+ 
+ <div class="col-2 circle">
+ 	<img src="{{product.icon.url}}" class="img img-fluid "  style="border-radius: 70%" />
+ </div>
+
+ <div class="col-6">
+   <a href="{% url 'detail' product.id user.username  %}"><h3>{{product.title}}</h3></a>
+   <p>{{product.summary}}</p>
+   <br/>
+ </div>
+
+ <div class="col-4">
+ 	<button type="button" class="btn btn-success" style="padding: 10px 10px;"> Posted by : <span class="badge"> 
+ 	{{product.postedby}}
+ 	 </span></button>
+ </div>
+
 
 </div>
 
@@ -27,9 +60,7 @@
 
 
 
-{% if user.user_type == "ordinaryuser" %}
 
-<a href="{% url 'buytoken' tok user.username %}"> <button> buy tokens </button> </a>
 
-{% endif %}
+{% endblock %}
 

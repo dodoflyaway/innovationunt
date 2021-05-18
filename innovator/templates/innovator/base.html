@@ -55,18 +55,21 @@
 
           <a class="navbar-brand" href="#">
           <img src="{% static 'logo.png' %}" height=50 width=48 class="d-inline-block alignh-top " />
-          Innovation hunt
+          product hunt
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
+
               {% block link %}
            
-
+                 
 
               {% endblock %}
+
+              <a class="nav-link" href="{% url 'login' %}" style="margin-left:4px"> logout </a>
             </div>
           </div>
 

@@ -13,16 +13,18 @@
 
 {% block content%}
 
-<div class="alert alert-danger" role="alert">
+
   
 
 {% if error %}
+<div class="alert alert-danger" role="alert">
 {{ error }}
+</div>
 <br />
 <br />
 {% endif %}
 
-</div>
+
 
 <form method="POST" action="{% url 'login' %}" enctype="multipart/form-data">
 <br />

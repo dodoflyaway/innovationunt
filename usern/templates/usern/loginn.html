@@ -11,23 +11,21 @@
 
 {% block content%}
 
-<h2> user login up page </h2>
 
-<div class="alert alert-danger" role="alert">
-  
+
 
 {% if error %}
+<div class="alert alert-danger" role="alert">
 {{ error }}
+</div>
 <br />
 <br />
 {% endif %}
 
-</div>
-
 
 <form method="POST" action="{% url 'loginn' %}" enctype="multipart/form-data">
 
-
+<h2> user login up page </h2>
 
 {% csrf_token %}
 username
