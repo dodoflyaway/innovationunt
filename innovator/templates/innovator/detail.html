@@ -98,8 +98,6 @@
 	  <br/>
 	  <br/>
 	  
-	  <br/>
-	  <br/>
 	  
 	  {% endif  %}
 
@@ -120,22 +118,31 @@
 		<a href="{% url  'commentmake' product.id pname.username  %}"> <button> comment </button> </a>
 
 
-	  {% endif  %}
+	    {% endif  %}
 
-    </div>
+	    <button type="button" class="btn btn-success">Posted By <span class="badge"> {{product.postedby}} </span></button>
+
+	    <br/>
+	    <br/>
+
+	    <button type="button" class="btn btn-success">Posted on <span class="badge"> {{product.pub_date_pretty}} </span></button>
+
+	    
+
+      </div>
 
 	</div>
 
 </div>
 
+<br/>
+<br/>
 
-
-
-
-
-{{product.body}}
-
-
+<div class="container">
+  <div class="row pt-4 px-2 rounded" style="background: lightblue">
+	<p class="text-justify text-center font-weight-bold ">{{product.body}}</p>
+  </div>
+</div>
 
 
 

@@ -1,3 +1,20 @@
+{% extends "innovator/base.html" %}
+
+{% block link  %}
+
+
+ <a class="nav-link" href="{% url 'home' 1  user.username %}"> home  </a>
+
+
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+
 
 {% if error %}
 {{ error }}
@@ -5,9 +22,15 @@
 <br />
 {% endif %}
 
+<br>
+<div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">  Product creation page  </h1>
+      <br>
+</div>
+<br>
 
-<h1> Product creation page </h1>
-<br/>
+
+
 <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
 
 {% csrf_token %}
@@ -19,7 +42,7 @@ Title:
 
 Body:
 <br />
-<input type="textbox" name="body"/>
+<input type="textbox" name="body" style="line-height: 80px; width: 400px"/>
 <br />
 
 Project Status:
@@ -45,3 +68,5 @@ Image:
 
 </form>
 
+
+{% endblock %}

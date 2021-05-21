@@ -1,8 +1,35 @@
-<h1>subcribers for {{userobj.username}} </h1>
-{% for su in userobj.sub_set.all %}
-
-<h4> {{su.ordinary_username}} <h4>
+{% extends "innovator/base.html "%}
 
 
+{% block link %}
 
-{% endfor %}
+
+ <a class="nav-link" href="{% url 'home' 1  userobj.username %}"> home  </a>
+
+
+{% endblock %}
+
+{% block content %}
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">  subcribers for {{userobj.username}}  </h1>
+      <br>
+ </div>
+ <br>
+
+
+ <div class="container rounded">
+ 	<div class="row pt-2 rounded">
+ 		<div class="col-lg-11 well-sm pt-3 pb-3 rounded center" style="background: #b3cccc ">
+ 			{% for su in userobj.sub_set.all %}
+   				<h4 class="well-sm rounded pt-1 pb-1 text-center" style="background: #ccffee"> {{su.ordinary_username}} </h4>
+   				
+ 			{% endfor %}
+ 		</div>
+ 	</div>
+ </div>
+
+
+
+{% endblock %}

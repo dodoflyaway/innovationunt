@@ -123,7 +123,7 @@ def create(response):
 
 
 
-	return render(response,'innovator/create.html')
+	return render(response,'innovator/create.html',{'user':user})
 
 
 

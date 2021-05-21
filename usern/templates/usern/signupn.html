@@ -15,16 +15,18 @@
 <h1> user sign up</h1>
 
 
-<div class="alert alert-danger" role="alert">
+
   
 
 {% if error %}
+<div class="alert alert-danger" role="alert">
 {{ error }}
+</div>
 <br />
 <br />
 {% endif %}
 
-</div>
+
 
 
 <form method="POST" action="{% url 'signupn' %}" enctype="multipart/form-data">
