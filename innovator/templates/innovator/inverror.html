@@ -1,12 +1,25 @@
-<h1> error page </h1>
-<script type="text/javascript"> alert(" Error "); </script>
-{% if error %}
-{{ error }}
-<br />
-<br />
-{% endif %}
+{% extends "innovator/base.html" %}
 
+
+{%block link%}
+{% endblock  %}
+
+
+{% block content %}
+<script type="text/javascript"> alert(" Error "); </script>
+
+<div class="alert alert-danger" >
+	<h1> error page </h1>
+
+	{% if error %}
+	{{ error }}
+	<br />
+	<br />
+	{% endif %}
+</div>
 
  
 
 <a href="{% url 'detail' product.id creator %}"> click here to return back to detail page </a>
+
+{% endblock %}
