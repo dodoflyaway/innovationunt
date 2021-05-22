@@ -1,4 +1,26 @@
-<h4> token donations </h4>
+{% extends "innovator/base.html" %}
+
+
+{% block link %}
+
+<a class="nav-link" href="{% url 'home' 2  username %}"> home  </a>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded pt-3" style="background: #b3ffb3">
+      <h1 style="padding: 0px 0px"> donating to  {{prod.title}}  </h1>
+      <br>
+ </div>
+ <br>
+
+
 
 
 {% if error %}
@@ -38,3 +60,4 @@ amount of tokens
 
 </form>
 
+{% endblock %}

@@ -1,3 +1,16 @@
+{% extends "innovator/base.html" %}
+
+
+{%block link%}
+
+<!-- nav link -->
+
+<a class="nav-link" href="{% url 'loginadmin' %}"> login  </a>
+
+
+{% endblock %}
+
+{% block content %}
 <h2> Admin sign up page </h2>
 
 {% if error %}
@@ -63,4 +76,8 @@ password2
 </form>
 
 
-<a href="/loginadmin"> admin login </a>
+
+
+
+
+{% endblock %}

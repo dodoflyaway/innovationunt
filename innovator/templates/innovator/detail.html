@@ -36,7 +36,7 @@
 
 	<button type="button" class="btn btn-primary">logged as <span class="badge"> {{pname.username}} </span></button>
 
-    <a class="nav-link" href="{% url  'tokendonate' product.id pname.username product.postedby.username  %}" style="margin-left:8px"> donate </a>
+   
 
 	{% endif  %}
 
@@ -106,26 +106,44 @@
 
 		<div>
 		  <a href="javascript:(document.getElementById('subcriber').submit())">
-		  	<button>subcribe</button> </a>
+		  	<button type="button" class="btn btn-info">subcribe</button> </a>
 		</div>
 
 		<form id="subcriber" method="POST" action="{% url 'subcriber' product.id  pname.username product.postedby.username %}" >
 		{% csrf_token %}
 		<input type="hidden">
 		</form>
+        
+        <br/>
+         
+		<a href="{% url  'commentmake' product.id pname.username  %}"> <button type="button" class="btn btn-info"> comment </button> </a>
+
+		<br/>
+        <br/>
+
+        <a href="{% url  'tokendonate' product.id pname.username product.postedby.username  %}"> <button type="button" class="btn btn-info"> donate </button> </a>
 
 
-		<a href="{% url  'commentmake' product.id pname.username  %}"> <button> comment </button> </a>
+        
+        <br/>
+        <br/>
 
 
 	    {% endif  %}
 
-	    <button type="button" class="btn btn-success">Posted By <span class="badge"> {{product.postedby}} </span></button>
+	    <button type="button" class="btn btn-success">Posted By:<span class="badge">{{product.postedby}} </span></button>
 
 	    <br/>
 	    <br/>
 
-	    <button type="button" class="btn btn-success">Posted on <span class="badge"> {{product.pub_date_pretty}} </span></button>
+	    <button type="button" class="btn btn-success">Posted on:<span class="badge">{{product.pub_date_pretty}} </span></button>
+
+	    <br/>
+	    <br/>
+
+	    <button type="button" class="btn btn-success"> Status:<span class="badge">{{product.prostatus}} </span></button>
+
+
 
 	    
 

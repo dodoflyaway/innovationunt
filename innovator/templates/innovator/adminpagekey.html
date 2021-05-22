@@ -1,4 +1,26 @@
-<h1> Admin access page </h1>
+{% extends "innovator/base.html" %}
+
+
+{%block link %}
+
+
+
+{% endblock %}
+
+{% block content %}
+
+<br>
+ <br>
+ <div class="well-sm text-muted text-center rounded pt-3" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px"> Admin access panel </h1>
+      <br>
+ </div>
+ <br>
+
+
+
+
+
 
 {% if error %}
 {{ error }}
@@ -17,6 +39,7 @@
 	<br />
 	<br />
 
-	<input  class="btn btn-primary" type="submit" value="signup" />
+	<input  class="btn btn-primary" type="submit" value="enter" />
 
 </form>
+{% endblock %}

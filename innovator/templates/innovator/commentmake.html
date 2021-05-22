@@ -1,30 +1,57 @@
-<h2> hello make you comment you fool </h2>
-{{prod.id}}
+{% extends "innovator/base.html" %}
+
+
+{%block link%}
+
+   <!--  nav bar -->
+   <a class="nav-link" href="{% url 'home' 2  username %}"> home  </a>
+
+{% endblock %}
+
+
+{%block content%}
+
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">  comment on   {{prod.title}} project </h1>
+      <br>
+ </div>
+ <br>
+
+
 
 
 {% if error %}
+<div class="alert alert-danger" role="alert">
 {{ error }}
+</div>
 <br />
 <br />
 {% endif %}
-<br />
-
-{{username}}
 
 
-<form method="POST" action="{% url 'commentmake' prod.id username %}" enctype="multipart/form-data">
+<div class="container" style="justify-content: center">
 
-{% csrf_token %}
+   <div class="row " style="justify-content: center" >
+   	<div class="col-lg-8" style=" justify-content: center; " >
+	 <form method="POST" action="{% url 'commentmake' prod.id username %}" enctype="multipart/form-data">
 
-comment
-<br />
-<input type="text" name="commentz"   style="line-height:80px;width: 500px"; />
-<br />
-<br />
+	{% csrf_token %}
 
-<input  class="btn btn-primary" type="submit" value="commentmake" />
+    
+	<br />
+	<input type="text" name="commentz"   style="line-height:80px;width: 500px;padding: 20px 10px; border: 5px solid"; />
+	<br />
+	<br />
 
+	<input  class="btn btn-primary" type="submit" value="comment" />
+    </div>
 
-</form>
+	</form>
+   </div>
+  </div>
 
+</div>
 
+{% endblock %}

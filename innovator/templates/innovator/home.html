@@ -22,7 +22,7 @@
 {% block content%}
 <br>
 <div class="well text-muted text-center" style="background: #b3ffb3">
-      <h1 style="padding: 10px 10px"> Projects  </h1>
+      <h1 class="pt-3"> Projects  </h1>
       <br>
 </div>
 <br>
@@ -36,11 +36,11 @@
 <div class="row pt-3">
  
  <div class="col-2 circle">
- 	<img src="{{product.icon.url}}" class="img img-fluid "  style="border-radius: 70%" />
+ 	<img src="{{product.icon.url}}" class="img img-fluid "   />
  </div>
 
  <div class="col-6">
-   <a href="{% url 'detail' product.id user.username  %}"><h3>{{product.title}}</h3></a>
+   <a  class="nav-link " style="color: #808080" href="{% url 'detail' product.id user.username  %}"><h3>{{product.title}}</h3></a>
    <p>{{product.summary}}</p>
    <br/>
  </div>

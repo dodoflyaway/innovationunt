@@ -1,10 +1,37 @@
-<h1> showing comments 24/7 </h1>
+{% extends "innovator/base.html "%}
 
-{{prod}}
+{% block link %}
+   <!--  nav bar -->
+   <a class="nav-link" href="{% url 'home' 1  creator.username %}"> home  </a>
 
-{% for item in prod.comment_set.all %}
+{% endblock %}
 
-<h5> {{item.commentz}} </h5> <br>
-<h6> commented by {{item.ordusername}} </h6> <br>
+{% block content %}
 
-{% endfor%}
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">  comments on  {{prod.title}} project </h1>
+      <br>
+ </div>
+ <br>
+
+
+<div class="container">
+    <div class="row pt-4 ">
+
+		{% for item in prod.comment_set.all %}
+
+		    <div class="col-lg-8"><h5> {{item.commentz}} </h5> </div>
+		    <br/>
+		    <br/>
+	        <div class="col-lg-4"><button type="button" class="btn btn-info">  <span class="badge">  {{item.ordusername}} : commented </span></button> </div>
+
+
+		{% endfor%}
+    </div>
+
+</div>
+
+
+{% endblock %}

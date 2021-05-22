@@ -1,4 +1,26 @@
-<h2> admin login up page </h2>
+{% extends "innovator/base.html" %}
+
+
+{%block link %}
+
+<!-- nav link -->
+
+<a class="nav-link" href="{% url 'signupadmin' %}"> sign up   </a>
+
+
+{% endblock %}
+
+{%block content %}
+
+ <br>
+ <div class="well-sm text-muted text-center rounded pt-3" style="background: #b3ffb3">
+      <h1 style="padding: 0px 0px"> admin login up   </h1>
+      <br>
+ </div>
+ <br>
+
+
+
 
 {% if error %}
 {{ error }}
@@ -34,7 +56,7 @@ password
 
 </form>
 
-<a href="/signupadmin"> admin sign up </a>
+
 <br />
 <a href="/loginn"> are you a normal user</a>
 
@@ -43,3 +65,4 @@ password
 
 
 
+{% endblock %}

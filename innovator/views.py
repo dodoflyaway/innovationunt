@@ -40,6 +40,7 @@ def signup(response):
 			else:
 				return render(response,'innovator/signup.html', {'error':'Both passwords must match'})
 			usersign.save()
+			return redirect('login')
 
 		else:
 			return render(response,'innovator/signup.html', {'error':'All field are required.'})
@@ -189,6 +190,7 @@ def commentmake(response,product_id,username):
 			com.ordusername = username
 			com.commentz = response.POST['commentz']
 			com.save()
+			return redirect("/detail/"+str(product_id)+str("/")+str(username))
 		else:
 			return render(response,'innovator/commentmake.html', {'prod':prod,'username':username,'error':'All field are required'})
         
@@ -200,12 +202,12 @@ def commentmake(response,product_id,username):
 
 
 def commentshow(response,product_id,creator):
-	print(creator)
 	print(product_id)
 	prod = product.objects.get(id=product_id)
+	creator = invuser.objects.get(username=creator)
+	print(creator)
 
-
-	return render(response,'innovator/commentshow.html',{'prod':prod})
+	return render(response,'innovator/commentshow.html',{'prod':prod,'creator':creator})
 
 
 
@@ -301,12 +303,12 @@ def tokendonate(response,product_id,username,creator):
 
 
 		else:
-			return render(response,'innovator/tokendonate.html',{'product_id':product_id,'username':username,'creator':creator,'error':'All field are required'})
+			return render(response,'innovator/tokendonate.html',{'prod':product_obj,'product_id':product_id,'username':username,'creator':creator,'error':'All field are required'})
 
 	else:
-		return render(response,'innovator/tokendonate.html',{'product_id':product_id,'username':username,'creator':creator})
+		return render(response,'innovator/tokendonate.html',{'prod':product_obj ,'product_id':product_id,'username':username,'creator':creator})
 
-	return render(response,'innovator/tokendonate.html',{'product_id':product_id,'username':username,'creator':creator})
+	return render(response,'innovator/tokendonate.html',{'prod':product_obj ,'product_id':product_id,'username':username,'creator':creator})
 
 
 

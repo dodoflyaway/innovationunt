@@ -19,11 +19,11 @@
  <br>
 
 
- <div class="container rounded">
- 	<div class="row pt-2 rounded">
- 		<div class="col-lg-11 well-sm pt-3 pb-3 rounded center" style="background: #b3cccc ">
+ <div class="container rounded" style="background: #f2f2f2" >
+ 	<div class="row pt-2 rounded" style="justify-content: center" >
+ 		<div class="col-lg-8 well-sm pt-3 pb-3 rounded center" >
  			{% for su in userobj.sub_set.all %}
-   				<h4 class="well-sm rounded pt-1 pb-1 text-center" style="background: #ccffee"> {{su.ordinary_username}} </h4>
+   				<h4 class="well-sm rounded pt-1 pb-1 text-center text-muted" style="background: #80ffd4"> {{su.ordinary_username}} </h4>
    				
  			{% endfor %}
  		</div>
