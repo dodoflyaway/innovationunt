@@ -1,33 +1,73 @@
-<h3> admin home page </h3>
-
-<h4> logged in as 
-
-     {%for i in  admin_obj.all%}
-
-       {{i.username}}
-
-     {% endfor %}
+{% extends "innovator/base.html "%}
 
 
- </h4>
+{% block link %}
 
+
+
+
+<button type="button" class="btn btn-success">logged as:<span class="badge">{{sp_admin.username}} <span></button>
+
+
+<a class="nav-link" href="{% url 'adminuprove' sp_admin.username %}">  projects for approval  </a>
+
+
+{% endblock %}
+
+{% block content %}
+
+
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">   admin home page  </h1>
+      <br>
+ </div>
+ <br>
+
+
+
+
+
+
+<div class="container">
 {% for product in  product.all %}
-
-  <h3>{{product.title}}</h3>
+   <div class="row pt-3">
+ 
+    <div class="col-2 circle">
+ 	  <img src="{{product.icon.url}}" class="img img-fluid "   />
+ 	 </div>
+   
   
-  <h5>{{product.summary}}</h5> 
 
-   {{product.postedby.username}}
+  <div class="col-4">
+  <h4>{{product.title}}</h4>
+
+  
+  <p>{{product.summary}}</p> 
+  </div>
+  <div class="col-3">
+  <button type="button" class="btn btn-primary">Posted By<span class="badge"> {{product.postedby.username}} </span></button>
+  </div>
+
+  <div class="col-3">
+  	<button type="button" class="btn btn-success">status <span class="badge"> {{product.prostatus}} </span></button>
+
+  </div>
+
+   
     
    <br/>
 
-
+ </div>
 {% endfor %}
+</div>
+<br>
+<br>
 
 
-<a href="{% url 'adminuprove' sp_admin.username %}"> <button> projects for approval </button> </a>
 
-
+{% endblock %}
 
 
 
