@@ -1,3 +1,39 @@
-<h1> encash status page </h1>
-<h3> {{product.product.title}} project </h3>
-<h4> your approval  is {{product.status}} </h4>
+{% extends "innovator/base.html "%}
+
+
+{% block link %}
+
+<!-- Nav link  -->
+
+ <a class="nav-link" href="{% url 'home' 1  creator %}"> home  </a>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">  encash status page for   {{product.product.postedby}}  </h1>
+      <br>
+ </div>
+ <br>
+
+
+<div class="container">
+    <div class="row">
+	<div class="col-lg-8">
+		<h3 class="display-1 text-center" style="justify-content: center" > {{product.product.title}} project </h3>
+	</div>
+	<div class="col-lg-4 pt-5">
+		<button type="button" class="btn btn-primary"> <h4> Project  is {{product.status}} </h4> </button>
+	</div>
+    </div>
+
+
+</div>
+
+{% endblock %}

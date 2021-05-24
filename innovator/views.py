@@ -336,7 +336,7 @@ def todoadd(response,product_id,creator):
 			todo_obj.save()  
 
 		else:
-			return render(response,'innovator/todoadd.html',{'product':product_obj,'creator':creator})
+			return render(response,'innovator/todoadd.html',{'product':product_obj,'creator':creator,'error':' all fields required'})
 
 	else:
 		return render(response,'innovator/todoadd.html',{'product':product_obj,'creator':creator})
@@ -497,7 +497,7 @@ def encash(response,product_id,creator,key):
 def encashstatus(response,product_id,creator):
 	prod_stat_obj = encash_request.objects.get(product=product_id)
 	print(prod_stat_obj)
-	return render(response,'innovator/encashstatus.html',{'product':prod_stat_obj})
+	return render(response,'innovator/encashstatus.html',{'product':prod_stat_obj,'creator':creator})
 
 
 

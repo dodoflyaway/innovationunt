@@ -1,7 +1,22 @@
+{% extends "innovator/base.html "%}
+
+
+{% block link%}
+
+<a class="nav-link" href="{% url 'home' 2  username %}"> home  </a>
+
+
+{% endblock %}
+
+
+{%block content%}
+
 <h1> error page </h1>
 
 {% if error %}
+<div class="alert alert-danger" role="alert">
 {{ error }}
+</div>
 <br />
 <br />
 {% endif %}
@@ -10,3 +25,5 @@
 
 
 <a href="{% url 'detail' product_id username %}"> click here to return back to detail page </a>
+
+{% endblock %}

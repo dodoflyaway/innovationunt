@@ -1,9 +1,31 @@
-<h1>manage account </h1>
+{% extends "innovator/base.html" %}
 
-<h4> Projects under {{creator.username}}</h4>
+
+{%block link %}
+
+<a class="nav-link" href="{% url 'home' 1  creator %}"> home  </a>
+
+{% endblock %}
+
+
+{% block  content %}
+
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">  manage account   </h1>
+      <br>
+ </div>
+ <br>
+
+
+<h5 class="display-3 text-center" style="justify-content: center" >  Projects under {{creator.username}} </h5>
+
 
 {% if error %}
+<div class="alert alert-danger" role="alert">
 {{ error }}
+</div>
 <br />
 <br />
 {% endif %}
@@ -11,8 +33,9 @@
 
 
 {% for key,value in mix_dict.items %}
+
    
-   {{creator.username}}
+   
    
     <form method="POST" action="{% url 'manageaccount' product.id creator.username   %}"> 
        	{% csrf_token %}
@@ -21,12 +44,18 @@
        <input name="encashtoken{{key.id}}" class="btn btn-primary" type="submit" value=" Encash "  style=margin-left:10px;/> </h5> 
        {% if Trueshow == True  and rid == key.id %}
          Account number 
+         <br/>
        	<input type="number" name="key"/>
        	 <input name="submitencashtoken{{key.id}}" class="btn btn-primary" type="submit" value=" encash"  style=margin-left:10px;/> </h5> 
 
-
+       <br/>
+       <br/>
        {% endif %}
+       <br/>
     </form>
    
 
 {% endfor %}
+
+
+{% endblock %}

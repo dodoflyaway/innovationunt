@@ -1,10 +1,28 @@
-<h3>Manage project</h3>
+{% extends "innovator/base.html" %}
 
 
+{%block link %}
 
-<h4> projects posted by {{creator}} </h4>
+<a class="nav-link" href="{% url 'home' 1  creator %}"> home  </a>
+
+{% endblock %}
+
+{% block content %}
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">  Manage project </h1>
+      <br>
+ </div>
+ <br>
+
+
+<h5 class="display-3 text-center" style="justify-content: center" > projects posted by {{creator}} </h5>
+
+
 
 {% for item in creator.product_set.all %}
+<div class="container">
    <br/>
      
   
@@ -49,5 +67,8 @@
 
     <br/>
 
-    
+</div>  
 {% endfor %}
+
+
+{% endblock %}

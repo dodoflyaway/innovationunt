@@ -1,17 +1,52 @@
-<h2>Admin aprove page</h2>
+{% extends "innovator/base.html "%}
+
+{% block link %}
+
+
+ <a class="nav-link" href="{% url 'adminmain' admin.username %}"> home  </a>
+
+{% endblock %}
+
+{% block content %}
+
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">  Encashment approval request page   </h1>
+      <br>
+ </div>
+ <br>
+
+
+
+
 {% for i in  project %}
-     <h3> posted by {{i.user}}</h3>
-	<form method="POST" action="{% url 'adminuprove' admin.username %}">
-	{% csrf_token %}
-    <h4> project : {{ i.product.title }}
-    
-    <input name="adminuprove{{i.id}}" class="btn btn-primary" type="submit" value=" uprove "  style=margin-left:10px;/> </h4> 
+    <div class="container">
+    	<div class="row">
+    		<br/>
+    		
 
-
-	</form>
+		     <div class="col-lg-5"><h4> posted by {{i.user}}</h4></div>
+			<div class="col-lg-4"><form method="POST" action="{% url 'adminuprove' admin.username %}">
+			{% csrf_token %}
+		    <h5> project : {{ i.product.title }} 
+		    
+		    <input name="adminuprove{{i.id}}" class="btn btn-primary" type="submit" value=" uprove "  style=margin-left:10px;/> </h5>  
+			</form> </div>
+			<div class="col-lg-3">
+			<button type="button" class="btn btn-success">status <span class="badge"> {{i.status}} </span></button>
+			 
+		   <br/>
+		  </div>
+		  <br/>
+	  </div>
+	  <br/>
+    </div>
 
 
 
 
 
 {% endfor %}
+
+{% endblock %}

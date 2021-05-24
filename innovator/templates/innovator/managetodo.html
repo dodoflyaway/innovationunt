@@ -1,21 +1,41 @@
-<h3>Manage todolist </h3>
+{% extends "innovator/base.html" %}
 
-{{product.todo}}
+{%block link %}
 
-<h4> todo list for the project  {{product.title}} </h4>
+<a class="nav-link" href="{% url 'home' 1  creator %}"> home  </a>
 
+{% endblock %}
+
+{% block content %}
+
+
+
+
+<br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px"> <h4>Manage todo list for the project  {{product.title}} </h4>  </h1>
+      <br>
+ </div>
+ <br>
+
+
+
+<div class="container">
 {% for item in product.todo_set.all %}
    <br/>
+   <div class=row>
      
 
-       <form method="POST" action="{% url 'managetodo' product.id creator.username %}"> 
+       <div class="col-lg-6"><form method="POST" action="{% url 'managetodo' product.id creator.username %}"> 
        	{% csrf_token %}
-       	{{item.title}}  
-       <input name="todostatuschange{{item.id}}" class="btn btn-primary" type="submit" value="todostatuschange"  style=margin-left:10px;/>
+       	<h2>{{item.title}}</h2></div>  
+       <div class="col-lg-5"><input name="todostatuschange{{item.id}}" class="btn btn-primary" type="submit" value="todostatuschange"  style=margin-left:10px;/></div>
        </form>
+    </div>
 
        {% if tdrstat == True and rid == item.id  %}
-
+        <div class="row">
 
         
 
@@ -24,16 +44,20 @@
          <form method="POST" action="{% url 'managetodo' product.id creator.username %}" enctype="multipart/form-data">
 
          	{% csrf_token%}
-            select the status of TODO item
+             <div class="col-lg-4"> <h5>status of TODO item</h5> </div>
 
+          <div class="col-lg-4">
          	<br>
          	<select name="todoupdatestatus{{item.id}}" id="todo_status">
 				<option value="inprogress">inprogress</option>
 				<option value="completed">completed</option>
              </select>
          	<br>
-
+         </div>
+          <div class="col-lg-3">
+          <br/>
          	<input  class="btn btn-primary" type="submit" value="update" />
+         </div>
 
 
          
@@ -43,10 +67,13 @@
 
 
           </form>
-
+        </div>
        {% endif %}
 
     <br/>
 
     
 {% endfor %}
+</div>
+
+{% endblock %}

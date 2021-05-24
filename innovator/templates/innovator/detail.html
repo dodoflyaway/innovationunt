@@ -17,8 +17,21 @@
       	<a class="nav-link" href="{% url 'managetodo' product.id pname.username  %}"> Manage TODO</a>
 
       	<a class="nav-link" href="{% url 'manageaccount' product.id pname.username  %}"> Account </a>
+        
+         {% for stat in  product.encash_request_set.all %}
 
-      	<a class="nav-link" href="{% url 'encashstatus' product.id pname.username  %}">Encash status </a>
+   			{%if stat.status == "pending"%}
+      			<a class="nav-link" href="{% url 'encashstatus' product.id pname.username  %}">Encash status </a>
+      		{% endif %}
+
+      		{%if stat.status == "Encashed" %}
+      		 	<a class="nav-link" href="{% url 'encashstatus' product.id pname.username  %}">Encash status </a>
+      		{% endif %}
+
+	    {% endfor %}
+
+         
+
 
       	
 
@@ -143,6 +156,7 @@
 
 
 
+
 	    
 
       </div>
@@ -162,15 +176,15 @@
 
 <br/>
 
-<div class="container rounded" style="justify-content: center;background: #ffe6f3 ">
+<div class="container rounded" style="justify-content: center; ">
 	<br>
-    <div class="well-sm text-muted text-center rounded pt-1" style="background: #ffe6f3">
+    <div class="well-sm text-muted text-center rounded pt-1" style="background: #ffff80">
       <h1 > Todo list for   {{product.title}}  </h1>
       <br>
     </div>
 
        {% for todo in product.todo_set.all %}
-        <div class="row "> <div class="col-lg-11"> <h2> {{todo.title}} </h2> </div> </div>
+        <div class="row "> <div class="col-lg-11" style="margin-left: 15px"> <h2>    {{todo.title}} </h2> </div> </div>
          <br>
         <div class="container">
   		<div class="row pt-4 pb-4 px-2 rounded" style="background: #fff0e6">

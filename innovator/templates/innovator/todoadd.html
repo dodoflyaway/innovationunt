@@ -1,15 +1,39 @@
-<h4> add todo </h4>
+{% extends "innovator/base.html "%}
+
+
+{% block link%}
+
+<a class="nav-link" href="{% url 'home' 1  creator %}"> home  </a>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+ <br>
+ <br>
+ <div class="well-sm text-muted text-center rounded" style="background: #b3ffb3">
+      <h1 style="padding: 2px 4px">  adding todo items for {{product.title}} </h1>
+      <br>
+ </div>
+ <br>
+
+
+
 
 {% if error %}
+<div class="alert alert-danger" role="alert">
 {{ error }}
+</div>
 <br />
 <br />
 {% endif %}
 <br />
 
 
-<h5> adding todo items for {{product.title}} </h5>
-{{product.postedby}}
+
 
 <form method="POST" action="{% url 'todoadd' product.id  creator %}" enctype="multipart/form-data">
 
@@ -40,3 +64,6 @@ todo status
 
 
 <input  class="btn btn-primary" type="submit" value="todoadd" />
+
+
+{% endblock %}

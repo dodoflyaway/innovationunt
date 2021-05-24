@@ -1,4 +1,11 @@
+{% extends "innovator/base.html "%}
+
+
+
+{% block content  %}
+
 <h1> success page </h1>
+
 
 {% if success %}
 {{ success }}
@@ -6,7 +13,9 @@
 <br />
 {% endif %}
 
+<a href="{% url 'detail' product.id creator %}"> click here to return back to detail page </a>
+
+{% endblock %}
 
  
 
-<a href="{% url 'detail' product.id creator %}"> click here to return back to detail page </a>
