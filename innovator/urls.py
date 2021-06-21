@@ -28,6 +28,7 @@ urlpatterns = [
    path("adminpagekey/",views.adminpagekey,name="adminpagekey"),
    path("adminmain/<adminname>",views.adminmain,name="adminmain"),
    path("adminuprove/<adminname>",views.adminuprove,name="adminuprove"),
+   path("remove/<adminname>",views.remove,name="remove"),
 
    
 

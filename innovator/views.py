@@ -582,6 +582,7 @@ def adminmain(response,adminname):
 def adminuprove(response,adminname):
 	project = encash_request.objects.all()
 	admin_user = admin_my.objects.get(username=adminname)
+	print(response.POST)
 	if response.method == 'POST':
 		for i in project:
 			if response.POST.get("adminuprove"+str(i.id)):
@@ -600,5 +601,25 @@ def adminuprove(response,adminname):
 				return HttpResponse("<h2>Project  approved for encash ment amount sent </h2>")
 
 	return render(response,'innovator/adminuprove.html',{'project':project,'admin':admin_user})
+
+
+def remove(response,adminname):
+	admin_user = admin_my.objects.get(username=adminname)
+	prod = product.objects.all()
+	for i in  prod:
+		if response.POST.get("remove"+str(i.id)):
+			del_obj = product.objects.get(id=i.id)
+			encash_status = encash_request.objects.get(product=del_obj)
+			if encash_status.status == "Encashed":
+				del_obj.delete()
+			else:
+				return HttpResponse("<h2>not encashed can not be removed <h2>")
+
+
+
+	return render(response,'innovator/successadmin.html',{'admin':admin_user})
+
+
+	
 
 
